@@ -11,6 +11,16 @@
 
 #include <asm/arch/rmobile.h>
 
+#ifndef CONFIG_RCAR_RGID
+#define CONFIG_RCAR_RGID		0
+#endif
+
+#define ADDR_RGID(a)			(((a) & 0xFULL) << 36ULL)
+#define ADDR_RGID_MASK			(0x000000F000000000ULL)
+#define ADDR_PA_MASK			(0x0000000FFFFFFFFFULL)
+
+#define ADDR_ASSIGN_RGID(a,b)		(((a) & ADDR_PA_MASK) | (ADDR_RGID(b) & ADDR_RGID_MASK))
+
 #define CONFIG_REMAKE_ELF
 
 /* boot option */

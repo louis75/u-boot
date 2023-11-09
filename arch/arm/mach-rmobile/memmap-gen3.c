@@ -15,33 +15,33 @@
 static struct mm_region gen3_mem_map[GEN3_NR_REGIONS] = {
 	{
 		.virt = 0x0UL,
-		.phys = 0x0UL,
+		.phys = ADDR_ASSIGN_RGID(0x0UL, CONFIG_RCAR_RGID),
 		.size = 0x40000000UL,
 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
 			 PTE_BLOCK_NON_SHARE |
 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
 	}, {
 		.virt = 0x40000000UL,
-		.phys = 0x40000000UL,
+		.phys = ADDR_ASSIGN_RGID(0x40000000UL, CONFIG_RCAR_RGID),
 		.size = 0x03F00000UL,
 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 			 PTE_BLOCK_INNER_SHARE
 	}, {
 		.virt = 0x47E00000UL,
-		.phys = 0x47E00000UL,
+		.phys = ADDR_ASSIGN_RGID(0x47E00000UL, CONFIG_RCAR_RGID),
 		.size = 0x78200000UL,
 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 			 PTE_BLOCK_INNER_SHARE
 	}, {
 		.virt = 0xc0000000UL,
-		.phys = 0xc0000000UL,
+		.phys = ADDR_ASSIGN_RGID(0xc0000000UL, CONFIG_RCAR_RGID),
 		.size = 0x40000000UL,
 		.attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
 			 PTE_BLOCK_NON_SHARE |
 			 PTE_BLOCK_PXN | PTE_BLOCK_UXN
 	}, {
 		.virt = 0x100000000UL,
-		.phys = 0x100000000UL,
+		.phys = ADDR_ASSIGN_RGID(0x100000000UL, CONFIG_RCAR_RGID),
 		.size = 0xf00000000UL,
 		.attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 			 PTE_BLOCK_INNER_SHARE
@@ -62,7 +62,7 @@ void enable_caches(void)
 
 	/* Create map for RPC access */
 	gen3_mem_map[i].virt = 0x0ULL;
-	gen3_mem_map[i].phys = 0x0ULL;
+	gen3_mem_map[i].phys = ADDR_ASSIGN_RGID(0x0ULL, CONFIG_RCAR_RGID);
 	gen3_mem_map[i].size = 0x40000000ULL;
 	gen3_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
 				PTE_BLOCK_NON_SHARE |
@@ -86,7 +86,7 @@ void enable_caches(void)
 		if (start == 0x48000000) {
 			/* Unmark protection area (0x43F00000 to 0x47DFFFFF) */
 			gen3_mem_map[i].virt = 0x40000000ULL;
-			gen3_mem_map[i].phys = 0x40000000ULL;
+			gen3_mem_map[i].phys = ADDR_ASSIGN_RGID(0x40000000ULL, CONFIG_RCAR_RGID);
 			gen3_mem_map[i].size = 0x03F00000ULL;
 			gen3_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 						PTE_BLOCK_INNER_SHARE;
@@ -97,7 +97,7 @@ void enable_caches(void)
 		}
 
 		gen3_mem_map[i].virt = start;
-		gen3_mem_map[i].phys = start;
+		gen3_mem_map[i].phys = ADDR_ASSIGN_RGID(start, CONFIG_RCAR_RGID);
 		gen3_mem_map[i].size = size;
 		gen3_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 					PTE_BLOCK_INNER_SHARE;
@@ -106,7 +106,7 @@ void enable_caches(void)
 
 	/* Create map for register access */
 	gen3_mem_map[i].virt = 0xc0000000ULL;
-	gen3_mem_map[i].phys = 0xc0000000ULL;
+	gen3_mem_map[i].phys = ADDR_ASSIGN_RGID(0xc0000000ULL, CONFIG_RCAR_RGID);
 	gen3_mem_map[i].size = 0x40000000ULL;
 	gen3_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE) |
 				PTE_BLOCK_NON_SHARE |
@@ -127,7 +127,7 @@ void enable_caches(void)
 			continue;
 
 		gen3_mem_map[i].virt = start;
-		gen3_mem_map[i].phys = start;
+		gen3_mem_map[i].phys = ADDR_ASSIGN_RGID(start, CONFIG_RCAR_RGID);
 		gen3_mem_map[i].size = size;
 		gen3_mem_map[i].attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
 					PTE_BLOCK_INNER_SHARE;
@@ -145,5 +145,6 @@ void enable_caches(void)
 	if (!icache_status())
 		icache_enable();
 
+	gd->arch.tlb_addr = ADDR_ASSIGN_RGID(gd->arch.tlb_addr, CONFIG_RCAR_RGID);
 	dcache_enable();
 }

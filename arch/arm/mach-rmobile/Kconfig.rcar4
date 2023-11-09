@@ -63,4 +63,8 @@ source "board/renesas/spider/Kconfig"
 source "board/renesas/whitehawk/Kconfig"
 source "board/renesas/grayhawk/Kconfig"
 
+config RCAR_RGID
+	int "RGID"
+	default 0
+
 endif
