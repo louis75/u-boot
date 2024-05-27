@@ -16,11 +16,12 @@
 
 	aliases {
 		serial0 = &hscif0;
+		serial1 = &pl011;
 	};
 
 	chosen {
 		bootargs = "ignore_loglevel rw root=/dev/nfs ip=on";
-		stdout-path = "serial0:921600n8";
+		stdout-path = "serial1:38400n8";
 	};
 
 	memory@48000000 {

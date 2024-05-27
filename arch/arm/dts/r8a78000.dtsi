@@ -123,6 +123,21 @@
 			#size-cells = <0>;
 			status = "disabled";
 		};
+
+		sysclk: sysclk {
+		        compatible = "fixed-clock";
+		        #clock-cells = <0x00>;
+		        clock-frequency = <0x5f5e100>;
+		        clock-output-names = "sysclk";
+		};
+
+		pl011: uart@e5c00000 {
+		        compatible = "arm,pl011", "arm,primecell";
+		        reg = <0x00 0xe5c00000 0x00 0x1000>;
+		        interrupts = <0x00 0x3bf 0x04>;
+		        clock-names = "uartclk", "apb_pclk";
+		        clocks = <&sysclk>;
+		};
 	};
 
 	timer {
