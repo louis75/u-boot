@@ -689,6 +689,21 @@ config RENESAS_ETHER_SWITCH_DEFAULT_PORT
 	help
 	  Default port number for the Renesas Ethernet Switch driver.
 
+config RENESAS_ETHER_SWITCH3
+	bool "Renesas Ethernet Switch support"
+	depends on DM_ETH && R8A78000
+	select PHYLIB
+	help
+	  This driver implements support for the Renesas Ethernet Switch3
+	  which is available on R-Car X5H SoC (r8a78000).
+
+config RENESAS_ETHER_SWITCH3_DEFAULT_PORT
+	int "Renesas Ethernet Switch default port number"
+	depends on RENESAS_ETHER_SWITCH3
+	default 0
+	help
+	  Default port number for the Renesas Ethernet Switch3 driver.
+
 config MPC8XX_FEC
 	bool "Fast Ethernet Controller on MPC8XX"
 	depends on MPC8xx
