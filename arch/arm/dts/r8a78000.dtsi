@@ -49,6 +49,12 @@
 		clock-frequency = <0>;
 	};
 
+	rsw_clk: rsw_clk {
+		compatible = "fixed-clock";
+		clock-frequency = <600000000>;
+		#clock-cells = <0>;
+	};
+
 	soc: soc {
 		compatible = "simple-bus";
 		interrupt-parent = <&gic>;
@@ -87,6 +93,35 @@
 		prr: chipid@fff00044 {
 			compatible = "renesas,prr";
 			reg = <0 0xfff00044 0 4>;
+		};
+
+		pfc: pinctrl@e6050000 {
+			compatible = "renesas,pfc-r8a779f0";
+			reg = <0 0xe6050000 0 0x16c>, <0 0xe6050800 0 0x16c>,
+			<0 0xe6051000 0 0x16c>, <0 0xe6051800 0 0x16c>;
+		};
+
+		rswitch: ethernet@c9b80000 {
+			compatible = "renesas,etherswitch-r8a78000",
+					"renesas,etherswitch";
+			reg = <0 0xc9b80000 0 0x3ffff>,
+				<0 0xe6444000 0 0x2800>;
+			reg-names = "iobase", "serdes";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			clocks = <&rsw_clk>, <&rsw_clk>;
+			clock-names = "rsw2", "eth-phy";
+			status = "disabled";
+		};
+
+		i2c4: i2c@e66d8000 {
+			compatible = "renesas,i2c-r8a779f0",
+				"renesas,rcar-gen4-i2c";
+			reg = <0 0xe66d8000 0 0x40>;
+			i2c-scl-internal-delay-ns = <110>;
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "disabled";
 		};
 	};
 

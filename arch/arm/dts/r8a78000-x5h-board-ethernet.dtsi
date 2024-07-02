@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: GPL-2.0
+/*
+ * Device Tree Source for the R-Car X5H (r8a78000) SoC
+ *
+ * Copyright (C) 2024 Renesas Electronics Corp.
+ */
+
+&pfc {
+	tsn0_pins: tsn0 {
+		mux {
+			groups = "tsn0_link_b", "tsn0_mdio_b";
+			function = "tsn0";
+			drive-strength = <18>;
+			power-source = <1800>;
+		};
+	};
+};
+
+&i2c4 {
+	eeprom@52 {
+		compatible = "rohm,br24g01", "atmel,24c01";
+		label = "ethernet-sub-board";
+		reg = <0x52>;
+		pagesize = <8>;
+	};
+};
+
+&rswitch {
+	status = "okay";
+	pinctrl-0 = <&tsn0_pins>;
+	pinctrl-names = "default";
+	phy-mode = "sgmii";
+	#address-cells = <1>;
+	#size-cells = <0>;
+	vpf_mode;
+
+	fixed-link {
+		speed = <1000>;
+		full-duplex;
+	};
+};
+

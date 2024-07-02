@@ -8,6 +8,7 @@
 /dts-v1/;
 #include "r8a78000.dtsi"
 #include "r8a78000-u-boot.dtsi"
+#include "r8a78000-x5h-board-ethernet.dtsi"
 
 / {
 	model = "Renesas evaluation board for R-Car X5H";
