@@ -29,19 +29,9 @@
 		reg = <0x0 0x48000000 0x0 0x78000000>;
 	};
 
-	memory@480000000 {
+	memory@1080000000 {
 		device_type = "memory";
-		reg = <0x4 0x80000000 0x0 0x80000000>;
-	};
-
-	memory@800000000 {
-		device_type = "memory";
-		reg = <0x8 0x00000000 0x1 0x00000000>;
-	};
-
-	memory@c00000000 {
-		device_type = "memory";
-		reg = <0xc 0x00000000 0x1 0x00000000>;
+		reg = <0x10 0x80000000 0x2 0x80000000>;
 	};
 };
 
