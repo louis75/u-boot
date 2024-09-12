@@ -131,14 +131,14 @@ void sh_pfc_write_raw_reg(void __iomem *mapped_reg, unsigned int reg_width,
 	BUG();
 }
 
-u32 sh_pfc_read(struct sh_pfc *pfc, u32 reg)
+u32 sh_pfc_read(struct sh_pfc *pfc, u64 reg)
 {
 	return sh_pfc_read_raw_reg((void __iomem *)(uintptr_t)reg, 32);
 }
 
-static void sh_pfc_unlock_reg(struct sh_pfc *pfc, u32 reg, u32 data)
+static void sh_pfc_unlock_reg(struct sh_pfc *pfc, u64 reg, u32 data)
 {
-	u32 unlock;
+	u64 unlock;
 
 	if (!pfc->info->unlock_reg)
 		return;
@@ -152,7 +152,7 @@ static void sh_pfc_unlock_reg(struct sh_pfc *pfc, u32 reg, u32 data)
 	sh_pfc_write_raw_reg((void __iomem *)(uintptr_t)unlock, 32, ~data);
 }
 
-void sh_pfc_write(struct sh_pfc *pfc, u32 reg, u32 data)
+void sh_pfc_write(struct sh_pfc *pfc, u64 reg, u32 data)
 {
 	sh_pfc_unlock_reg(pfc, reg, data);
 	sh_pfc_write_raw_reg((void __iomem *)(uintptr_t)reg, 32, data);
@@ -189,7 +189,7 @@ static void sh_pfc_write_config_reg(struct sh_pfc *pfc,
 
 	sh_pfc_config_reg_helper(pfc, crp, field, &mapped_reg, &mask, &pos);
 
-	dev_dbg(pfc->dev, "write_reg addr = %x, value = 0x%x, field = %u, "
+	dev_dbg(pfc->dev, "write_reg addr = %llx, value = 0x%x, field = %u, "
 		"r_width = %u, f_width = %u\n",
 		crp->reg, value, field, crp->reg_width, crp->field_width);
 
@@ -809,7 +809,8 @@ static int sh_pfc_pinconf_set(struct sh_pfc_pinctrl *pmx, unsigned _pin,
 {
 	struct sh_pfc *pfc = pmx->pfc;
 	void __iomem *pocctrl;
-	u32 addr, val;
+	u64 addr;
+	u32 val;
 	int bit, ret;
 	int idx = sh_pfc_get_pin_index(pfc, _pin);
 	const struct sh_pfc_pin *pin = &pfc->info->pins[idx];

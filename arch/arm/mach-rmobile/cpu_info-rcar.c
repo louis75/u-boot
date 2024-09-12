@@ -16,7 +16,7 @@
 static u32 rmobile_get_prr(void)
 {
 	if (IS_ENABLED(CONFIG_RCAR_64))
-		return readl(0xFFF00044);
+		return readl(ADDR_ASSIGN_RGID(0xFFF00044, CONFIG_RCAR_RGID));
 }
 
 u32 rmobile_get_cpu_type(void)
@@ -52,5 +52,5 @@ u32 rmobile_get_cpu_rev_fraction(void)
 u32 rmobile_get_otpmonitor17(void)
 {
 	if (IS_ENABLED(CONFIG_RCAR_64))
-		return readl(0xE61BF144);
+		return readl(ADDR_ASSIGN_RGID(0xE61BF144, CONFIG_RCAR_RGID));
 }

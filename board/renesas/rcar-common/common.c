@@ -25,7 +25,7 @@ DECLARE_GLOBAL_DATA_PTR;
 /* If the firmware passed a device tree use it for e.g. U-Boot DRAM setup. */
 extern u64 rcar_atf_boot_args[];
 
-#define FDT_RPC_PATH	"/soc/spi@ee200000"
+#define FDT_RPC_PATH	"/soc/spi@20ee200000"
 
 int fdtdec_board_setup(const void *fdt_blob)
 {
@@ -79,7 +79,7 @@ void __weak reset_cpu(void)
 		hang();
 }
 #elif defined(CONFIG_RCAR_GEN4)
-#define RST_BASE	0xE6160000 /* Domain0 */
+#define RST_BASE	ADDR_ASSIGN_RGID(0xE6160000, CONFIG_RCAR_RGID) /* Domain0 */
 #define RST_SRESCR0	(RST_BASE + 0x18)
 #define RST_SPRES	0x5AA58000
 
