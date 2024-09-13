@@ -134,15 +134,16 @@ struct ravb_priv {
 	struct gpio_desc	reset_gpio;
 };
 
-static inline void ravb_flush_dcache(u32 addr, u32 len)
+static inline void ravb_flush_dcache(u64 addr, u32 len)
 {
 	flush_dcache_range(addr, addr + len);
 }
 
-static inline void ravb_invalidate_dcache(u32 addr, u32 len)
+static inline void ravb_invalidate_dcache(u64 addr, u32 len)
 {
-	u32 start = addr & ~((uintptr_t)ARCH_DMA_MINALIGN - 1);
-	u32 end = roundup(addr + len, ARCH_DMA_MINALIGN);
+	u64 start = addr & ~((uintptr_t)ARCH_DMA_MINALIGN - 1);
+	u64 end = roundup(addr + len, ARCH_DMA_MINALIGN);
+
 	invalidate_dcache_range(start, end);
 }
 
@@ -198,7 +199,7 @@ static int ravb_recv(struct udevice *dev, int flags, uchar **packetp)
 	}
 
 	len = desc->data.ctrl & RAVB_DESC_DS_MASK;
-	packet = (u8 *)(uintptr_t)desc->data.dptr;
+	packet = (u8 *)ADDR_ASSIGN_RGID((uintptr_t)desc->data.dptr, CONFIG_RCAR_RGID);
 	ravb_invalidate_dcache((uintptr_t)packet, len);
 
 	*packetp = packet;
