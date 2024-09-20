@@ -31,6 +31,9 @@ int fdtdec_board_setup(const void *fdt_blob)
 {
 	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
 
+	if(!atf_fdt_blob)
+		return 0;
+
 	if (fdt_magic(atf_fdt_blob) == FDT_MAGIC)
 		fdt_overlay_apply_node((void *)fdt_blob, 0, atf_fdt_blob, 0);
 
@@ -172,6 +175,9 @@ static void update_rpc_status(void *blob)
 {
 	void *atf_fdt_blob = (void *)(rcar_atf_boot_args[1]);
 	int offset, enabled;
+
+	if(!atf_fdt_blob)
+		return;
 
 	/*
 	 * Check if the DT fragment received from TF-A had its RPC-IF device node
