@@ -24,15 +24,15 @@
 		stdout-path = "serial0:921600n8";
 	};
 
-	memory@48000000 {
+	memory@2048000000 {
 		device_type = "memory";
 		/* first 128MB is reserved for secure area. */
-		reg = <0x0 0x48000000 0x0 0x15c00000>;
+		reg = <0x20 0x48000000 0x0 0x15c00000>;
 	};
 
 	memory@480000000 {
 		device_type = "memory";
-		reg = <0x4 0x80000000 0x1 0x80000000>;
+		reg = <0x24 0x80000000 0x1 0x80000000>;
 	};
 
 	reg_1p8v: regulator-1p8v {

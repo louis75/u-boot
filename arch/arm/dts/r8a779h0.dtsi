@@ -59,18 +59,18 @@
 		#size-cells = <2>;
 		ranges;
 
-		pfc: pinctrl@e6050000 {
+		pfc: pinctrl@20e6050000 {
 			compatible = "renesas,pfc-r8a779h0";
-			reg = <0 0xe6050000 0 0x16c>, <0 0xe6050800 0 0x16c>,
-			      <0 0xe6058000 0 0x16c>, <0 0xe6058800 0 0x16c>,
-			      <0 0xe6060000 0 0x16c>, <0 0xe6060800 0 0x16c>,
-			      <0 0xe6061000 0 0x16c>, <0 0xe6061800 0 0x16c>;
+			reg = <0x20 0xe6050000 0 0x16c>, <0x20 0xe6050800 0 0x16c>,
+			      <0x20 0xe6058000 0 0x16c>, <0x20 0xe6058800 0 0x16c>,
+			      <0x20 0xe6060000 0 0x16c>, <0x20 0xe6060800 0 0x16c>,
+			      <0x20 0xe6061000 0 0x16c>, <0x20 0xe6061800 0 0x16c>;
 		};
 
-		gpio0: gpio@e6050180 {
+		gpio0: gpio@20e6050180 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6050180 0 0x54>;
+			reg = <0x20 0xe6050180 0 0x54>;
 			interrupts = <GIC_SPI 619 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -82,10 +82,10 @@
 			resets = <&cpg 915>;
 		};
 
-		gpio1: gpio@e6050980 {
+		gpio1: gpio@20e6050980 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6050980 0 0x54>;
+			reg = <0x20 0xe6050980 0 0x54>;
 			interrupts = <GIC_SPI 623 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -97,10 +97,10 @@
 			resets = <&cpg 915>;
 		};
 
-		gpio2: gpio@e6058180 {
+		gpio2: gpio@20e6058180 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6058180 0 0x54>;
+			reg = <0x20 0xe6058180 0 0x54>;
 			interrupts = <GIC_SPI 627 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -112,10 +112,10 @@
 			resets = <&cpg 916>;
 		};
 
-		gpio3: gpio@e6058980 {
+		gpio3: gpio@20e6058980 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6058980 0 0x54>;
+			reg = <0x20 0xe6058980 0 0x54>;
 			interrupts = <GIC_SPI 631 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -127,10 +127,10 @@
 			resets = <&cpg 916>;
 		};
 
-		gpio4: gpio@e6060180 {
+		gpio4: gpio@20e6060180 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6060180 0 0x54>;
+			reg = <0x20 0xe6060180 0 0x54>;
 			interrupts = <GIC_SPI 635 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -142,10 +142,10 @@
 			resets = <&cpg 917>;
 		};
 
-		gpio5: gpio@e6060980 {
+		gpio5: gpio@20e6060980 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6060980 0 0x54>;
+			reg = <0x20 0xe6060980 0 0x54>;
 			interrupts = <GIC_SPI 639 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -157,10 +157,10 @@
 			resets = <&cpg 917>;
 		};
 
-		gpio6: gpio@e6061180 {
+		gpio6: gpio@20e6061180 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6061180 0 0x54>;
+			reg = <0x20 0xe6061180 0 0x54>;
 			interrupts = <GIC_SPI 643 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -172,10 +172,10 @@
 			resets = <&cpg 917>;
 		};
 
-		gpio7: gpio@e6061980 {
+		gpio7: gpio@20e6061980 {
 			compatible = "renesas,gpio-r8a779h0",
 				     "renesas,rcar-gen4-gpio";
-			reg = <0 0xe6061980 0 0x54>;
+			reg = <0x20 0xe6061980 0 0x54>;
 			interrupts = <GIC_SPI 647 IRQ_TYPE_LEVEL_HIGH>;
 			#gpio-cells = <2>;
 			gpio-controller;
@@ -187,9 +187,9 @@
 			resets = <&cpg 917>;
 		};
 
-		cpg: clock-controller@e6150000 {
+		cpg: clock-controller@20e6150000 {
 			compatible = "renesas,r8a779h0-cpg-mssr";
-			reg = <0 0xe6150000 0 0x4000>;
+			reg = <0x20 0xe6150000 0 0x4000>;
 			clocks = <&extal_clk>, <&extalr_clk>;
 			clock-names = "extal", "extalr";
 			#clock-cells = <2>;
@@ -197,21 +197,21 @@
 			#reset-cells = <1>;
 		};
 
-		rst: reset-controller@e6160000 {
+		rst: reset-controller@20e6160000 {
 			compatible = "renesas,r8a779h0-rst";
-			reg = <0 0xe6160000 0 0x4000>;
+			reg = <0x20 0xe6160000 0 0x4000>;
 		};
 
-		sysc: system-controller@e6180000 {
+		sysc: system-controller@20e6180000 {
 			compatible = "renesas,r8a779h0-sysc";
-			reg = <0 0xe6180000 0 0x4000>;
+			reg = <0x20 0xe6180000 0 0x4000>;
 			#power-domain-cells = <1>;
 		};
 
-		i2c0: i2c@e6500000 {
+		i2c0: i2c@20e6500000 {
 			compatible = "renesas,i2c-r8a779h0",
 				     "renesas,rcar-gen4-i2c";
-			reg = <0 0xe6500000 0 0x40>;
+			reg = <0x20 0xe6500000 0 0x40>;
 			interrupts = <GIC_SPI 610 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 518>;
 			power-domains = <&sysc R8A779H0_PD_ALWAYS_ON>;
@@ -222,10 +222,10 @@
 			status = "disabled";
 		};
 
-		i2c1: i2c@e6508000 {
+		i2c1: i2c@20e6508000 {
 			compatible = "renesas,i2c-r8a779h0",
 				     "renesas,rcar-gen4-i2c";
-			reg = <0 0xe6508000 0 0x40>;
+			reg = <0x20 0xe6508000 0 0x40>;
 			interrupts = <GIC_SPI 611 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 519>;
 			power-domains = <&sysc R8A779H0_PD_ALWAYS_ON>;
@@ -236,10 +236,10 @@
 			status = "disabled";
 		};
 
-		i2c2: i2c@e6510000 {
+		i2c2: i2c@20e6510000 {
 			compatible = "renesas,i2c-r8a779h0",
 				     "renesas,rcar-gen4-i2c";
-			reg = <0 0xe6510000 0 0x40>;
+			reg = <0x20 0xe6510000 0 0x40>;
 			interrupts = <GIC_SPI 612 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 520>;
 			power-domains = <&sysc R8A779H0_PD_ALWAYS_ON>;
@@ -250,10 +250,10 @@
 			status = "disabled";
 		};
 
-		i2c3: i2c@e66d0000 {
+		i2c3: i2c@20e66d0000 {
 			compatible = "renesas,i2c-r8a779h0",
 				     "renesas,rcar-gen4-i2c";
-			reg = <0 0xe66d0000 0 0x40>;
+			reg = <0x20 0xe66d0000 0 0x40>;
 			interrupts = <GIC_SPI 613 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 521>;
 			power-domains = <&sysc R8A779H0_PD_ALWAYS_ON>;
@@ -264,10 +264,10 @@
 			status = "disabled";
 		};
 
-		hscif0: serial@e6540000 {
+		hscif0: serial@20e6540000 {
 			compatible = "renesas,hscif-r8a779h0",
 				     "renesas,rcar-gen4-hscif", "renesas,hscif";
-			reg = <0 0xe6540000 0 0x60>;
+			reg = <0x20 0xe6540000 0 0x60>;
 			interrupts = <GIC_SPI 246 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 514>,
 				 <&cpg CPG_CORE R8A779H0_CLK_SASYNCPERD1>,
@@ -279,10 +279,10 @@
 			status = "disabled";
 		};
 
-		avb0: ethernet@e6800000 {
+		avb0: ethernet@20e6800000 {
 			compatible = "renesas,etheravb-r8a779h0",
 				     "renesas,etheravb-rcar-gen4";
-			reg = <0 0xe6800000 0 0x800>;
+			reg = <0x20 0xe6800000 0 0x800>;
 			interrupts = <GIC_SPI 335 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 336 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 337 IRQ_TYPE_LEVEL_HIGH>,
@@ -326,10 +326,10 @@
 			status = "disabled";
 		};
 
-		avb1: ethernet@e6810000 {
+		avb1: ethernet@20e6810000 {
 			compatible = "renesas,etheravb-r8a779h0",
 				     "renesas,etheravb-rcar-gen4";
-			reg = <0 0xe6810000 0 0x800>;
+			reg = <0x20 0xe6810000 0 0x800>;
 			interrupts = <GIC_SPI 360 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 361 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 362 IRQ_TYPE_LEVEL_HIGH>,
@@ -373,10 +373,10 @@
 			status = "disabled";
 			};
 
-		avb2: ethernet@e6820000 {
+		avb2: ethernet@20e6820000 {
 			compatible = "renesas,etheravb-r8a779h0",
 				     "renesas,etheravb-rcar-gen4";
-			reg = <0 0xe6820000 0 0x1000>;
+			reg = <0x20 0xe6820000 0 0x1000>;
 			interrupts = <GIC_SPI 385 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 386 IRQ_TYPE_LEVEL_HIGH>,
 				     <GIC_SPI 387 IRQ_TYPE_LEVEL_HIGH>,
@@ -420,10 +420,10 @@
 			status = "disabled";
 		};
 
-		mmc0: mmc@ee140000 {
+		mmc0: mmc@20ee140000 {
 			compatible = "renesas,sdhi-r8a779h0",
 				     "renesas,rcar-gen4-sdhi";
-			reg = <0 0xee140000 0 0x2000>;
+			reg = <0x20 0xee140000 0 0x2000>;
 			interrupts = <GIC_SPI 440 IRQ_TYPE_LEVEL_HIGH>;
 			clocks = <&cpg CPG_MOD 706>,
 				 <&cpg CPG_CORE R8A779H0_CLK_SD0H>;
@@ -434,20 +434,20 @@
 			status = "disabled";
 		};
 
-		gic: interrupt-controller@f1000000 {
+		gic: interrupt-controller@20f1000000 {
 			compatible = "arm,gic-v3";
 			#interrupt-cells = <3>;
 			#address-cells = <0>;
 			interrupt-controller;
-			reg = <0x0 0xf1000000 0 0x20000>,
-			      <0x0 0xf1060000 0 0x110000>;
+			reg = <0x20 0xf1000000 0 0x20000>,
+			      <0x20 0xf1060000 0 0x110000>;
 			interrupts = <GIC_PPI 9
 				      (GIC_CPU_MASK_SIMPLE(1) | IRQ_TYPE_LEVEL_HIGH)>;
 		};
 
-		prr: chipid@fff00044 {
+		prr: chipid@20fff00044 {
 			compatible = "renesas,prr";
-			reg = <0 0xfff00044 0 4>;
+			reg = <0x20 0xfff00044 0 4>;
 		};
 	};
 
