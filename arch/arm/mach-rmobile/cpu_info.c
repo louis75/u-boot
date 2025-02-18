@@ -83,6 +83,29 @@ static const struct {
 	{ 0x0, "CPU" },
 };
 
+#ifdef CONFIG_TARGET_GRAYHAWK
+static const struct {
+	u8 reg_val;
+	u8 variant1[6];
+	u8 variant2[10];
+} rmobile_variant[] = {
+	{ 0x0, "V4M-7", "R8A779H2"},
+	{ 0x1, "V4M-5", "R8A779H3"},
+	{ 0x2, "V4M-3", "R8A779H4"},
+	{ 0x3, "V4M-2", "R8A779H5"},
+};
+#elif CONFIG_TARGET_WHITEHAWK
+static const struct {
+	u8 reg_val;
+	u8 variant1[6];
+	u8 variant2[10];
+} rmobile_variant[] = {
+	{ 0x0, "V4H-7", "R8A779G3"},
+	{ 0x1, "V4H-5", "R8A779G4"},
+	{ 0x2, "V4H-3", "R8A779G5"},
+};
+#endif
+
 static int rmobile_cpuinfo_idx(void)
 {
 	int i = 0;
@@ -129,9 +152,36 @@ int print_cpuinfo(void)
 		return 0;
 	}
 
+#if defined(CONFIG_TARGET_GRAYHAWK) || defined(CONFIG_TARGET_WHITEHAWK)
+	if ((rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A779G0 &&
+	   rmobile_get_cpu_rev_integer() > 2) ||
+	   (rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A779G0 &&
+	   rmobile_get_cpu_rev_integer() == 2 &&
+	   rmobile_get_cpu_rev_fraction() == 2) ||
+	   (rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A779H0 &&
+	   rmobile_get_cpu_rev_integer() > 1) ||
+	   (rmobile_cpuinfo[i].cpu_type == RMOBILE_CPU_TYPE_R8A779H0 &&
+	   rmobile_get_cpu_rev_integer() == 1 &&
+	   rmobile_get_cpu_rev_fraction() == 0)) {
+		int j = 0;
+		u32 val = rmobile_get_otpmonitor17();
+
+		for (; j < ARRAY_SIZE(rmobile_variant) - 1; j++)
+			if (rmobile_variant[j].reg_val == val)
+				break;
+
+		printf("CPU:   Renesas Electronics %s rev %d.%d variant %s\n",
+		rmobile_variant[j].variant2, rmobile_get_cpu_rev_integer(),
+		rmobile_get_cpu_rev_fraction(), rmobile_variant[j].variant1);
+	} else
+		printf("CPU:   Renesas Electronics %s rev %d.%d\n",
+			get_cpu_name(i), rmobile_get_cpu_rev_integer(),
+			rmobile_get_cpu_rev_fraction());
+#else
 	printf("CPU:   Renesas Electronics %s rev %d.%d\n",
 		get_cpu_name(i), rmobile_get_cpu_rev_integer(),
 		rmobile_get_cpu_rev_fraction());
+#endif
 
 	return 0;
 }

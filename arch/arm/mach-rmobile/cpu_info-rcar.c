@@ -48,3 +48,9 @@ u32 rmobile_get_cpu_rev_fraction(void)
 	else
 		return prr & 0x0000000F;
 }
+
+u32 rmobile_get_otpmonitor17(void)
+{
+	if (IS_ENABLED(CONFIG_RCAR_64))
+		return readl(0xE61BF144);
+}
