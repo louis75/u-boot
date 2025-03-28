@@ -10,6 +10,7 @@
 #include <asm/io.h>
 #include <env.h>
 #include <linux/ctype.h>
+#include <asm/armv8/cpu.h>
 
 #ifdef CONFIG_ARCH_CPU_INIT
 int arch_cpu_init(void)
@@ -80,6 +81,12 @@ static int renesas_cpuinfo_idx(void)
 {
 	u32 cpu_type = renesas_get_cpu_type();
 	int i;
+
+#if defined(CONFIG_RCAR_GEN5)
+	/* Workaround for all-rezo R-Car X5H PRR issue */
+	if (cpu_type == 0)
+		cpu_type = RMOBILE_CPU_TYPE_R8A78000;
+#endif
 
 	for (i = 0; i < ARRAY_SIZE(renesas_cpuinfo) - 1; i++)
 		if (renesas_cpuinfo[i].cpu_type == cpu_type)
